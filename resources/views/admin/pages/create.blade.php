@@ -17,104 +17,105 @@
     <section class="content">
         <!-- Default box -->
         <div class="container-fluid">
-            <form action="" name="pageForm" id="pageForm" >
-            <div class="card">
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="mb-3">
-                                <label for="name">Name</label>
-                                <input type="text" name="name" id="name" class="form-control" placeholder="Name">
+            <form action="" name="pageForm" id="pageForm">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label for="name">Name</label>
+                                    <input type="text" name="name" id="name" class="form-control" placeholder="Name">
+                                </div>
                             </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="mb-3">
-                                <label for="slug">Slug</label>
-                                <input type="text" name="slug" id="slug" class="form-control" placeholder="Slug">
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label for="slug">Slug</label>
+                                    <input type="text" name="slug" id="slug" class="form-control" placeholder="Slug">
+                                </div>
                             </div>
-                        </div>
-                        <div class="col-md-12">
-                            <div class="mb-3">
-                                <label for="content">Content</label>
-                                <textarea name="content" id="content" class="summernote" cols="30" rows="10"></textarea>
+                            <div class="col-md-12">
+                                <div class="mb-3">
+                                    <label for="content">Content</label>
+                                    <textarea name="content" id="content" class="summernote" cols="30"
+                                              rows="10"></textarea>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="pb-5 pt-3">
-                <button class="btn btn-primary">Create</button>
-                <a href="{{route('pages.index')}}" class="btn btn-outline-dark ml-3">Cancel</a>
-            </div>
+                <div class="pb-5 pt-3">
+                    <button class="btn btn-primary">Create</button>
+                    <a href="{{route('pages.index')}}" class="btn btn-outline-dark ml-3">Cancel</a>
+                </div>
             </form>
         </div>
         <!-- /.card -->
     </section>
 @endsection
 @section('customJs')
-<script>
-    $("#pageForm").submit(function (event) {
-        event.preventDefault();
-        var element = $(this);
-        $('#bttn[type=submit]').prop('disabled',true);
-        $.ajax({
-            url: '{{ route("pages.store") }}',  // Use the correct route for POST
-            type: 'post',
-            data: element.serializeArray(),
-            dataType: 'json',
-            success: function (response) {
-                // Handle the success response
-                $('#bttn[type=submit]').prop('disabled',false);
+    <script>
+        $("#pageForm").submit(function (event) {
+            event.preventDefault();
+            var element = $(this);
+            $('#bttn[type=submit]').prop('disabled', true);
+            $.ajax({
+                url: '{{ route("pages.store") }}',  // Use the correct route for POST
+                type: 'post',
+                data: element.serializeArray(),
+                dataType: 'json',
+                success: function (response) {
+                    // Handle the success response
+                    $('#bttn[type=submit]').prop('disabled', false);
 
-                if (response['status'] == true) {
-                    window.location.href = "{{route('pages.index')}}";
-                    $('#name').removeClass('is-invalid').siblings('p').removeClass('invalid-feedback').html("");
-
-                    $('#slug').removeClass('is-invalid').siblings('p').removeClass('invalid-feedback').html("");
-
-                } else {
-                    var errors = response['errors'];
-                    if (errors['name']) {
-                        $('#name').addClass('is-invalid')
-                            .siblings('p').addClass('invalid-feedback').html(errors['name']);
-                    } else {
+                    if (response['status'] == true) {
+                        window.location.href = "{{route('pages.index')}}";
                         $('#name').removeClass('is-invalid').siblings('p').removeClass('invalid-feedback').html("");
-                    }
-                    if (errors['slug']) {
-                        $('#slug').addClass('is-invalid')
-                            .siblings('p').addClass('invalid-feedback').html(errors['slug']);
-                    } else {
+
                         $('#slug').removeClass('is-invalid').siblings('p').removeClass('invalid-feedback').html("");
+
+                    } else {
+                        var errors = response['errors'];
+                        if (errors['name']) {
+                            $('#name').addClass('is-invalid')
+                                .siblings('p').addClass('invalid-feedback').html(errors['name']);
+                        } else {
+                            $('#name').removeClass('is-invalid').siblings('p').removeClass('invalid-feedback').html("");
+                        }
+                        if (errors['slug']) {
+                            $('#slug').addClass('is-invalid')
+                                .siblings('p').addClass('invalid-feedback').html(errors['slug']);
+                        } else {
+                            $('#slug').removeClass('is-invalid').siblings('p').removeClass('invalid-feedback').html("");
+                        }
+                    }
+
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    console.log('Something went wrong', textStatus, errorThrown);
+                    console.log(jqXHR.responseText); // Log the response text for more details
+                }
+
+            })
+
+        });
+        $('#name').change(function () {
+            element = $(this);
+            $('#bttn[type=submit]').prop('disabled', true);
+
+            $.ajax({
+                url: '{{ route("getSlug") }}',
+                type: 'get',
+                data: {title: element.val()},
+                dataType: 'json',
+                success: function (response) {
+                    $('#bttn[type=submit]').prop('disabled', false);
+
+                    if (response['status'] == true) {
+                        $('#slug').val(response['slug']);
                     }
                 }
 
-            },
-            error: function (jqXHR, textStatus, errorThrown) {
-                console.log('Something went wrong', textStatus, errorThrown);
-                console.log(jqXHR.responseText); // Log the response text for more details
-            }
-
-        })
-
-    });
-    $('#name').change(function () {
-        element = $(this);
-        $('#bttn[type=submit]').prop('disabled', true);
-
-        $.ajax({
-            url: '{{ route("getSlug") }}',
-            type: 'get',
-            data: {title: element.val()},
-            dataType: 'json',
-            success: function (response) {
-                $('#bttn[type=submit]').prop('disabled', false);
-
-                if (response['status'] == true) {
-                    $('#slug').val(response['slug']);
-                }
-            }
-
-        })
-    });
-</script>
+            })
+        });
+    </script>
 @endsection

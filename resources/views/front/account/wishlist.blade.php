@@ -17,7 +17,7 @@
             <div class="container  mt-5">
                 <div class="row">
                     <div class="col-12">
-                    @include('front.account.common.message')</div>
+                        @include('front.account.common.message')</div>
                     <div class="col-md-3">
                         @include('front.account.common.sidebar')
                     </div>
@@ -29,21 +29,30 @@
                             <div class="card-body p-4">
                                 @if($wishlists->isNotEmpty())
                                     @foreach($wishlists as $wishlist)
-                                        <div class="d-sm-flex justify-content-between mt-lg-4 mb-4 pb-3 pb-sm-2 border-bottom">
+                                        <div
+                                            class="d-sm-flex justify-content-between mt-lg-4 mb-4 pb-3 pb-sm-2 border-bottom">
                                             <div class="d-block d-sm-flex align-items-start text-center text-sm-start">
-                                                <a class="d-block flex-shrink-0 mx-auto me-sm-4" href="{{route('front.product',$wishlist->product->slug)}}" style="width: 10rem;">
+                                                <a class="d-block flex-shrink-0 mx-auto me-sm-4"
+                                                   href="{{route('front.product',$wishlist->product->slug)}}"
+                                                   style="width: 10rem;">
                                                     @php
                                                         $productImage=getProductImages($wishlist->product_id);
                                                     @endphp
                                                     @if(!empty(getProductImages($wishlist->product_id)))
-                                                        <img src="{{asset('uploads/product/small/'.$productImage->image)}}" width="50"/>
+                                                        <img
+                                                            src="{{asset('uploads/product/small/'.$productImage->image)}}"
+                                                            width="50"/>
                                                     @else
-                                                        <img src="{{asset('admin-assets/img/default-150x150.png')}}"  width="50"/>
+                                                        <img src="{{asset('admin-assets/img/default-150x150.png')}}"
+                                                             width="50"/>
                                                     @endif
                                                 </a>
                                                 <div class="pt-2">
-                                                    <h3 class="product-title fs-base mb-2"><a href="{{route('front.product',$wishlist->product->slug)}}">{{$wishlist->product->title}}</a></h3>
-                                                    <div class="fs-lg text-accent pt-2">${{$wishlist->product->price}}<small>
+                                                    <h3 class="product-title fs-base mb-2"><a
+                                                            href="{{route('front.product',$wishlist->product->slug)}}">{{$wishlist->product->title}}</a>
+                                                    </h3>
+                                                    <div class="fs-lg text-accent pt-2">${{$wishlist->product->price}}
+                                                        <small>
                                                             @if($wishlist->product->compare_price >0)
                                                                 <span class="h6 text-underline"><del>${{$wishlist->product->compare_price}}</del></span>
                                                             @endif
@@ -51,7 +60,10 @@
                                                 </div>
                                             </div>
                                             <div class="pt-2 ps-sm-3 mx-auto mx-sm-0 text-center">
-                                                <button onclick="removeProduct({{$wishlist->product_id}}); " class="btn btn-outline-danger btn-sm" type="button"><i class="fas fa-trash-alt me-2"></i>Remove</button>
+                                                <button onclick="removeProduct({{$wishlist->product_id}}); "
+                                                        class="btn btn-outline-danger btn-sm" type="button"><i
+                                                        class="fas fa-trash-alt me-2"></i>Remove
+                                                </button>
                                             </div>
                                         </div>
 
@@ -59,30 +71,30 @@
                                 @endif
                             </div>
 
-                            </div>
                         </div>
                     </div>
                 </div>
             </div>
+            </div>
         </section>
     @endsection
 
-@section('customJs')
+    @section('customJs')
 
-<script>
-    function removeProduct(id){
+        <script>
+            function removeProduct(id) {
 
-        $.ajax({
-            url:'{{route('account.removeProductFromWishlist')}}',
-            type:'post',
-            data:{id:id},
-            datatype:'json',
-            success:function (response){
-                if (response.status==true){
-                    window.location.href="{{route('account.wishlist')}}"
-                }
+                $.ajax({
+                    url: '{{route('account.removeProductFromWishlist')}}',
+                    type: 'post',
+                    data: {id: id},
+                    datatype: 'json',
+                    success: function (response) {
+                        if (response.status == true) {
+                            window.location.href = "{{route('account.wishlist')}}"
+                        }
+                    }
+                });
             }
-        });
-    }
-</script>
-        @endsection
+        </script>
+    @endsection

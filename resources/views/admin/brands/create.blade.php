@@ -37,11 +37,11 @@
                                     <p></p>
                                 </div>
                             </div>
-                            </div>
+                        </div>
                     </div>
                 </div>
                 <div class="pb-5 pt-3">
-                    <button  type="submit" id="bttn" class="btn btn-primary">Create</button>
+                    <button type="submit" id="bttn" class="btn btn-primary">Create</button>
                     <a href="{{route('brands.index')}}" class="btn btn-outline-dark ml-3">Cancel</a>
                 </div>
             </form>
@@ -52,10 +52,10 @@
 @endsection
 @section('customJs')
     <script>
-        $("#brandForm").submit(function(event) {
+        $("#brandForm").submit(function (event) {
             event.preventDefault();
             var element = $(this);
-            $('#bttn[type=submit]').prop('disabled',true);
+            $('#bttn[type=submit]').prop('disabled', true);
             $.ajax({
                 url: '{{ route("brands.store") }}',  // Use the correct route for POST
                 type: 'post',
@@ -63,10 +63,10 @@
                 dataType: 'json',
                 success: function (response) {
                     // Handle the success response
-                    $('#bttn[type=submit]').prop('disabled',false);
+                    $('#bttn[type=submit]').prop('disabled', false);
 
                     if (response['status'] == true) {
-                        window.location.href="{{route('brands.index')}}";
+                        window.location.href = "{{route('brands.index')}}";
                         $('#name').removeClass('is-invalid').siblings('p').removeClass('invalid-feedback').html("");
 
                         $('#slug').removeClass('is-invalid').siblings('p').removeClass('invalid-feedback').html("");
@@ -83,7 +83,7 @@
                             $('#slug').addClass('is-invalid')
                                 .siblings('p').addClass('invalid-feedback').html(errors['slug']);
                         } else {
-                            $('#slug').removeClass('is-invalid').siblings('p').removeClass('invalid-feedback') .html("");
+                            $('#slug').removeClass('is-invalid').siblings('p').removeClass('invalid-feedback').html("");
                         }
                     }
 
@@ -96,9 +96,9 @@
             })
 
         });
-        $('#name').change(function (){
-            element=$(this);
-            $('#bttn[type=submit]').prop('disabled',true);
+        $('#name').change(function () {
+            element = $(this);
+            $('#bttn[type=submit]').prop('disabled', true);
 
             $.ajax({
                 url: '{{ route("getSlug") }}',
@@ -106,9 +106,9 @@
                 data: {title: element.val()},
                 dataType: 'json',
                 success: function (response) {
-                    $('#bttn[type=submit]').prop('disabled',false);
+                    $('#bttn[type=submit]').prop('disabled', false);
 
-                    if (response['status']==true){
+                    if (response['status'] == true) {
                         $('#slug').val(response['slug']);
                     }
                 }

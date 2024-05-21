@@ -43,23 +43,24 @@
 
                                     </div>
                                     <div class="col-md-12">
-                                    <div class="mb-3">
-                                        <label for="short_description"> Short Description</label>
-                                        <textarea name="short_description" id="short_description" cols="30" rows="10"
-                                            class="summernote" placeholder=""></textarea>
-                                    </div>
-                                    <div class="mb-3">
-                                        <label for="description">Description</label>
-                                        <textarea name="description" id="description" cols="30" rows="10"
-                                            class="summernote"
-                                            placeholder="Description"></textarea>
-                                    </div>
-                                    <div class="mb-3">
-                                        <label for="description">Shipping Returns</label>
-                                        <textarea name="shipping_returns" id="shipping_returns" cols="30" rows="10"
-                                            class="summernote"
-                                            placeholder=""></textarea>
-                                    </div>
+                                        <div class="mb-3">
+                                            <label for="short_description"> Short Description</label>
+                                            <textarea name="short_description" id="short_description" cols="30"
+                                                      rows="10"
+                                                      class="summernote" placeholder=""></textarea>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="description">Description</label>
+                                            <textarea name="description" id="description" cols="30" rows="10"
+                                                      class="summernote"
+                                                      placeholder="Description"></textarea>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="description">Shipping Returns</label>
+                                            <textarea name="shipping_returns" id="shipping_returns" cols="30" rows="10"
+                                                      class="summernote"
+                                                      placeholder=""></textarea>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -158,73 +159,74 @@
                             </div>
                         </div>
                         <div class="col-md-4">
-                        <div class="card mb-3">
-                            <div class="card-body">
-                            <h2 class="h4 mb-3">Related Products</h2>
+                            <div class="card mb-3">
+                                <div class="card-body">
+                                    <h2 class="h4 mb-3">Related Products</h2>
                                     <div class="mb-3">
-                                    <select multiple name="related_products[]" id="related_products" class="related-product w-100">
-                                    </select>
+                                        <select multiple name="related_products[]" id="related_products"
+                                                class="related-product w-100">
+                                        </select>
+                                    </div>
                                 </div>
                             </div>
+                            <div class="card">
+                                <div class="card-body">
+                                    <h2 class="h4  mb-3">Product category</h2>
+                                    <div class="mb-3">
+                                        <label for="category">Category</label>
+                                        <select name="category" id="category" class="form-control">
+                                            <option value=""> Select a Category</option>
+                                            @if($categories->isNotEmpty())
+                                                @foreach($categories as $category)
+                                                    <option value="{{$category->id}}">{{$category->name}}</option>
+                                                @endforeach
+                                            @endif
+                                        </select>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="sub_category">Sub category</label>
+                                        <select name="sub_category" id="sub_category" class="form-control">
+                                            <option value=""> Select a SubCategory</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card mb-3">
+                                <div class="card-body">
+                                    <h2 class="h4 mb-3">Product brand</h2>
+                                    <div class="mb-3">
+                                        <select name="brand" id="brand" class="form-control">
+                                            <option value=""> Select a Category</option>
+                                            @if($brands->isNotEmpty())
+                                                @foreach($brands as $brand)
+                                                    <option value="{{$brand->id}}">{{$brand->name}}</option>
+                                                @endforeach
+                                            @endif
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card mb-3">
+                                <div class="card-body">
+                                    <h2 class="h4 mb-3">Featured product</h2>
+                                    <div class="mb-3">
+                                        <select name="is_featured" id="is_featured" class="form-control">
+                                            <option value="No">No</option>
+                                            <option value="Yes">Yes</option>
+                                        </select>
+                                        <p class="error"></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                        <div class="card">
-                            <div class="card-body">
-                                <h2 class="h4  mb-3">Product category</h2>
-                                <div class="mb-3">
-                                    <label for="category">Category</label>
-                                    <select name="category" id="category" class="form-control">
-                                        <option value=""> Select a Category</option>
-                                        @if($categories->isNotEmpty())
-                                            @foreach($categories as $category)
-                                                <option value="{{$category->id}}">{{$category->name}}</option>
-                                            @endforeach
-                                        @endif
-                                    </select>
-                                </div>
-                                <div class="mb-3">
-                                    <label for="sub_category">Sub category</label>
-                                    <select name="sub_category" id="sub_category" class="form-control">
-                                        <option value=""> Select a SubCategory</option>
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="card mb-3">
-                            <div class="card-body">
-                                <h2 class="h4 mb-3">Product brand</h2>
-                                <div class="mb-3">
-                                    <select name="brand" id="brand" class="form-control">
-                                        <option value=""> Select a Category</option>
-                                        @if($brands->isNotEmpty())
-                                            @foreach($brands as $brand)
-                                                <option value="{{$brand->id}}">{{$brand->name}}</option>
-                                            @endforeach
-                                        @endif
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="card mb-3">
-                            <div class="card-body">
-                                <h2 class="h4 mb-3">Featured product</h2>
-                                <div class="mb-3">
-                                    <select name="is_featured" id="is_featured" class="form-control">
-                                        <option value="No">No</option>
-                                        <option value="Yes">Yes</option>
-                                    </select>
-                                    <p class="error"></p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
 
-                <div class="pb-5 pt-3">
-                    <button id="bttn" type="submit" class="btn btn-primary" >Create</button>
-                    <a href="{{route('products.index')}}" class="btn btn-outline-dark ml-3">Cancel</a>
+                    <div class="pb-5 pt-3">
+                        <button id="bttn" type="submit" class="btn btn-primary">Create</button>
+                        <a href="{{route('products.index')}}" class="btn btn-outline-dark ml-3">Cancel</a>
+                    </div>
                 </div>
-            </div>
-            <!-- /.card -->
+                <!-- /.card -->
         </form>
     </section>
     <!-- /.content -->
@@ -329,7 +331,7 @@
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             }, success: function (file, response) {
                 // $("#image_id").val(response.image_id);
-                var html= `<div class="col-md-3" id="image-row-${response.image_id}"><div class="card" ">
+                var html = `<div class="col-md-3" id="image-row-${response.image_id}"><div class="card" ">
         <input type="hidden" name="image_array[]" value="${response.image_id}">
                     <img src="${response.ImagePath}" class="card-img-top" alt="">
                         <div class="card-body">
@@ -338,29 +340,30 @@
                 </div> </div>`;
                 $('#product_gallery').append(html);
             },
-            complete:function (file){
+            complete: function (file) {
                 this.removeFile(file);
             }
         });
-        function deleteImage(id)
-        {
-            $("#image-row-"+id).remove();
+
+        function deleteImage(id) {
+            $("#image-row-" + id).remove();
         }
+
         //select related products
         $('.related-product').select2({
-    ajax: {
-        url: '{{route('products.getProduct')}}',
-        dataType: 'json',
-        tags: true,
-        multiple: true,
-        minimumInputLength: 3,
-        processResults: function(data) {
-            return {
-                results: data.tags
-            };
-        }
-    }
-});
+            ajax: {
+                url: '{{route('products.getProduct')}}',
+                dataType: 'json',
+                tags: true,
+                multiple: true,
+                minimumInputLength: 3,
+                processResults: function (data) {
+                    return {
+                        results: data.tags
+                    };
+                }
+            }
+        });
     </script>
 
 @endsection

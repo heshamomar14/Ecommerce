@@ -5,6 +5,7 @@ namespace App\Mail;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
+use Illuminate\Mail\Mailables\Attachment;
 use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
@@ -12,13 +13,15 @@ use Illuminate\Queue\SerializesModels;
 class ResetPasswordEmail extends Mailable
 {
     use Queueable, SerializesModels;
-public $formData;
+
+    public $formData;
+
     /**
      * Create a new message instance.
      */
     public function __construct($formData)
     {
-        $this->formData=$formData;
+        $this->formData = $formData;
     }
 
     /**
@@ -26,9 +29,7 @@ public $formData;
      */
     public function envelope(): Envelope
     {
-        return new Envelope(
-            subject: $this->formData['mailSubject'],
-        );
+        return new Envelope(subject: $this->formData['mailSubject'],);
     }
 
     /**
@@ -36,15 +37,13 @@ public $formData;
      */
     public function content(): Content
     {
-        return new Content(
-            view: 'email.reset-password',
-        );
+        return new Content(view: 'email.reset-password',);
     }
 
     /**
      * Get the attachments for the message.
      *
-     * @return array<int, \Illuminate\Mail\Mailables\Attachment>
+     * @return array<int, Attachment>
      */
     public function attachments(): array
     {

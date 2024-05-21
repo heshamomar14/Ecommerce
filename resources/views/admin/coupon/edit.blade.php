@@ -28,43 +28,50 @@
                             <div class="col-md-6">
                                 <div class="mb-3">
                                     <label for="name">code</label>
-                                    <input value="{{$coupon->code}}" type="text" name="code" id="code" class="form-control" placeholder="Coupon code">
+                                    <input value="{{$coupon->code}}" type="text" name="code" id="code"
+                                           class="form-control" placeholder="Coupon code">
                                     <p></p>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="mb-3">
                                     <label for="">name</label>
-                                    <input  value="{{$coupon->name}} "type="text" name="name" id="name" class="form-control" placeholder="Coupon code name">
+                                    <input value="{{$coupon->name}} " type="text" name="name" id="name"
+                                           class="form-control" placeholder="Coupon code name">
                                     <p></p>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="mb-3">
                                     <label for="">Description</label>
-                                    <textarea   class="form-control" name="description" id="description"cols="30" rows="5" >{{$coupon->description}} </textarea>
+                                    <textarea class="form-control" name="description" id="description" cols="30"
+                                              rows="5">{{$coupon->description}} </textarea>
                                     <p></p>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="mb-3">
                                     <label for="name">Max Uses</label>
-                                    <input  value="{{$coupon->max_uses}}"  type="text" name="max_uses" id="max_uses" class="form-control" placeholder="Max Uses">
+                                    <input value="{{$coupon->max_uses}}" type="text" name="max_uses" id="max_uses"
+                                           class="form-control" placeholder="Max Uses">
                                     <p></p>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="mb-3">
                                     <label for="name">Max Uses user</label>
-                                    <input value="{{$coupon->max_uses_user}}" type="text" name="max_uses_user" id="max_uses_user" class="form-control" placeholder="Max Uses User">
+                                    <input value="{{$coupon->max_uses_user}}" type="text" name="max_uses_user"
+                                           id="max_uses_user" class="form-control" placeholder="Max Uses User">
                                     <p></p>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="mb-3">
                                     <label for="status">Type</label>
-                                    <select  name="type" id="type" class="form-control">
-                                        <option {{($coupon->type=='percentage')?'selected':''}} value="percentage">Percentage</option>
+                                    <select name="type" id="type" class="form-control">
+                                        <option {{($coupon->type=='percentage')?'selected':''}} value="percentage">
+                                            Percentage
+                                        </option>
                                         <option {{($coupon->type=='fixed')?'selected':''}} value="fixed">Fixed</option>
                                     </select>
                                 </div>
@@ -72,21 +79,23 @@
                             <div class="col-md-6">
                                 <div class="mb-3">
                                     <label for="name">Discount Amount</label>
-                                    <input value="{{$coupon->discount_amount}}" type="text" name="discount_amount" id="discount_amount" class="form-control" placeholder="Discount Amount">
+                                    <input value="{{$coupon->discount_amount}}" type="text" name="discount_amount"
+                                           id="discount_amount" class="form-control" placeholder="Discount Amount">
                                     <p></p>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="mb-3">
                                     <label for="name">Min Amount</label>
-                                    <input value="{{$coupon->min_amount}}"  type="text" name="min_amount" id="min_amount" class="form-control" placeholder="Min Amount">
+                                    <input value="{{$coupon->min_amount}}" type="text" name="min_amount" id="min_amount"
+                                           class="form-control" placeholder="Min Amount">
                                     <p></p>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="mb-3">
                                     <label for="status">Status</label>
-                                    <select  name="status" id="status" class="form-control">
+                                    <select name="status" id="status" class="form-control">
                                         <option {{($coupon->status=='1')?'selected':''}} value="1">Active</option>
                                         <option {{($coupon->status=='0')?'selected':''}} value="0">Block</option>
                                     </select>
@@ -95,14 +104,17 @@
                             <div class="col-md-6">
                                 <div class="mb-3">
                                     <label for="">Start At</label>
-                                    <input value="{{$coupon->starts_at}}" autocomplete="off" type="text" name="starts_at" id="starts_at" class="form-control" placeholder="Start At">
+                                    <input value="{{$coupon->starts_at}}" autocomplete="off" type="text"
+                                           name="starts_at" id="starts_at" class="form-control" placeholder="Start At">
                                     <p></p>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="mb-3">
                                     <label for="">Expires At</label>
-                                    <input  value="{{$coupon->expires_at}}" autocomplete="off" type="text" name="expires_at" id="expires_at" class="form-control" placeholder="Expires At">
+                                    <input value="{{$coupon->expires_at}}" autocomplete="off" type="text"
+                                           name="expires_at" id="expires_at" class="form-control"
+                                           placeholder="Expires At">
                                     <p></p>
                                 </div>
                             </div>
@@ -110,7 +122,7 @@
                     </div>
                 </div>
                 <div class="pb-5 pt-3">
-                    <button  type="submit" id="bttn" class="btn btn-primary">Update</button>
+                    <button type="submit" id="bttn" class="btn btn-primary">Update</button>
                     <a href="{{route('coupon.index')}}" class="btn btn-outline-dark ml-3">Cancel</a>
                 </div>
             </form>
@@ -124,7 +136,7 @@
         $("#discountForm").submit(function (event) {
             event.preventDefault();
             var element = $(this);
-            $('#bttn[type=submit]').prop('disabled',true);
+            $('#bttn[type=submit]').prop('disabled', true);
             $.ajax({
                 url: '{{ route("coupon.update",$coupon->id) }}',  // Use the correct route for POST
                 type: 'put',
@@ -132,7 +144,7 @@
                 dataType: 'json',
                 success: function (response) {
                     // Handle the success response
-                    $('#bttn[type=submit]').prop('disabled',false);
+                    $('#bttn[type=submit]').prop('disabled', false);
 
                     if (response['status'] == true) {
                         window.location.href = "{{route('coupon.index')}}";
@@ -237,15 +249,16 @@
         {{--        $("#image_id").val(response.image_id);--}}
         {{--    }--}}
         {{--});--}}
-        $(document).ready(function(){
+        $(document).ready(function () {
             $('#starts_at').datetimepicker({
                 // options here
-                format:'Y-m-d H:i:s',
+                format: 'Y-m-d H:i:s',
             });
-        });$(document).ready(function(){
+        });
+        $(document).ready(function () {
             $('#expires_at').datetimepicker({
                 // options here
-                format:'Y-m-d H:i:s',
+                format: 'Y-m-d H:i:s',
             });
         });
     </script>

@@ -35,14 +35,14 @@
                             <div class="col-md-6">
                                 <div class="mb-3">
                                     <label for="">Email</label>
-                                    <input type="text" name="email" id="email" class="form-control" >
+                                    <input type="text" name="email" id="email" class="form-control">
                                     <p></p>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="mb-3">
                                     <label for="">Password</label>
-                                    <input type="password" name="password" id="password" class="form-control" >
+                                    <input type="password" name="password" id="password" class="form-control">
                                     <p></p>
                                 </div>
                             </div>
@@ -57,7 +57,7 @@
                             <div class="col-md-6">
                                 <div class="mb-3">
                                     <label for="status">Status</label>
-                                    <select  name="status" id="status" class="form-control">
+                                    <select name="status" id="status" class="form-control">
                                         <option value="1">Active</option>
                                         <option value="0">Block</option>
                                     </select>
@@ -67,7 +67,7 @@
                     </div>
                 </div>
                 <div class="pb-5 pt-3">
-                    <button  type="submit" id="bttn" class="btn btn-primary">Create</button>
+                    <button type="submit" id="bttn" class="btn btn-primary">Create</button>
                     <a href="{{route('users.index')}}" class="btn btn-outline-dark ml-3">Cancel</a>
                 </div>
             </form>
@@ -81,7 +81,7 @@
         $("#userForm").submit(function (event) {
             event.preventDefault();
             var element = $(this);
-            $('#bttn[type=submit]').prop('disabled',true);
+            $('#bttn[type=submit]').prop('disabled', true);
             $.ajax({
                 url: '{{ route("users.store") }}',  // Use the correct route for POST
                 type: 'post',
@@ -89,7 +89,7 @@
                 dataType: 'json',
                 success: function (response) {
                     // Handle the success response
-                    $('#bttn[type=submit]').prop('disabled',false);
+                    $('#bttn[type=submit]').prop('disabled', false);
 
                     if (response['status'] == true) {
                         window.location.href = "{{route('users.index')}}";

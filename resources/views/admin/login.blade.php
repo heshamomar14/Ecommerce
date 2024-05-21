@@ -5,7 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Laravel Shop :: Administrative Panel</title>
     <!-- Google Font: Source Sans Pro -->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="{{asset('admin-assets/plugins/fontawesome-free/css/all.min.css')}}">
     <!-- Theme style -->
@@ -26,7 +27,8 @@
                 @csrf
                 <div class="input-group mb-3">
                     <input type="email" name="email" id="email"
-                       value="{{old('email')}}"    class="form-control  @error('email') is-invalid  @enderror" placeholder="Email">
+                           value="{{old('email')}}" class="form-control  @error('email') is-invalid  @enderror"
+                           placeholder="Email">
                     <div class="input-group-append">
                         <div class="input-group-text">
                             <span class="fas fa-envelope"></span>
@@ -37,7 +39,8 @@
                 <span>{{$message}}</span>
                 @enderror
                 <div class="input-group mb-3">
-                    <input type="password" class="form-control  @error('password') is-invalid  @enderror" name="password" id="password" placeholder="Password">
+                    <input type="password" class="form-control  @error('password') is-invalid  @enderror"
+                           name="password" id="password" placeholder="Password">
                     <div class="input-group-append">
                         <div class="input-group-text">
                             <span class="fas fa-lock"></span>

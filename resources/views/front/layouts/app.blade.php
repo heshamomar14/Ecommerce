@@ -72,10 +72,11 @@
                 @endif
                 <form action="{{route('front.shop')}}" method="get">
                     <div class="input-group">
-                        <input value="{{Request::get('search')}}" type="text" placeholder="Search For Products" class="form-control" name="search" id="search">
+                        <input value="{{Request::get('search')}}" type="text" placeholder="Search For Products"
+                               class="form-control" name="search" id="search">
                         <button type="submit" class="input-group-text">
-							<i class="fa fa-search"></i>
-					  	</button>
+                            <i class="fa fa-search"></i>
+                        </button>
                     </div>
                 </form>
             </div>
@@ -112,7 +113,7 @@
                                     <ul class="dropdown-menu dropdown-menu-dark">
                                         @foreach($category->subcategories as $subcategory)
                                             <li><a class="dropdown-item nav-link"
-                                                href="{{route('front.shop',[$category->slug,$subcategory->slug])}}">{{$subcategory->name}}</a>
+                                                   href="{{route('front.shop',[$category->slug,$subcategory->slug])}}">{{$subcategory->name}}</a>
                                             </li>
                                         @endforeach
                                     </ul>
@@ -134,7 +135,7 @@
 
 
 <main>
-@yield('content')
+    @yield('content')
 </main>
 <footer class="bg-dark mt-5">
     <div class="container pb-5 pt-3">
@@ -153,16 +154,17 @@
                 <div class="footer-card">
                     <h3>Important Links</h3>
                     <ul>
-            @if(staticPages()->isNotEmpty())
-                @foreach(staticPages() as $page)
-                                <li><a href="{{route('front.page',$page->slug)}}" title="{{$page->name}}">{{$page->name}}</a></li>
-                @endforeach
-            @endif
-{{--                        <li><a href="about-us.php" title="About">About</a></li>--}}
-{{--                        <li><a href="contact-us.php" title="Contact Us">Contact Us</a></li>--}}
-{{--                        <li><a href="#" title="Privacy">Privacy</a></li>--}}
-{{--                        <li><a href="#" title="Privacy">Terms & Conditions</a></li>--}}
-{{--                        <li><a href="#" title="Privacy">Refund Policy</a></li>--}}
+                        @if(staticPages()->isNotEmpty())
+                            @foreach(staticPages() as $page)
+                                <li><a href="{{route('front.page',$page->slug)}}"
+                                       title="{{$page->name}}">{{$page->name}}</a></li>
+                            @endforeach
+                        @endif
+                        {{--                        <li><a href="about-us.php" title="About">About</a></li>--}}
+                        {{--                        <li><a href="contact-us.php" title="Contact Us">Contact Us</a></li>--}}
+                        {{--                        <li><a href="#" title="Privacy">Privacy</a></li>--}}
+                        {{--                        <li><a href="#" title="Privacy">Terms & Conditions</a></li>--}}
+                        {{--                        <li><a href="#" title="Privacy">Refund Policy</a></li>--}}
                     </ul>
                 </div>
             </div>
@@ -231,40 +233,43 @@
             navbar.classList.remove("sticky");
         }
     }
+
     $.ajaxSetup({
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         }
     });
-    function addToCart(id){
+
+    function addToCart(id) {
         $.ajax({
-            url:'{{route('front.addToCart')}}',
-            type:'post',
-            data:{id:id},
-            datatype:'json',
-            success:function (response){
-                if (response.status==true){
-                    window.location.href="{{route('front.cart')}}"
-                }else {
+            url: '{{route('front.addToCart')}}',
+            type: 'post',
+            data: {id: id},
+            datatype: 'json',
+            success: function (response) {
+                if (response.status == true) {
+                    window.location.href = "{{route('front.cart')}}"
+                } else {
                     alert(response.message);
                 }
             }
         });
     }
+
     function addToWishlists(id) {
 
         $.ajax({
-            url:'{{route('front.addToWishlists')}}',
-            type:'post',
-            data:{id:id},
-            datatype:'json',
-            success:function (response){
-                if (response.status==true){
+            url: '{{route('front.addToWishlists')}}',
+            type: 'post',
+            data: {id: id},
+            datatype: 'json',
+            success: function (response) {
+                if (response.status == true) {
                     $("#wishlistModal .modal-body").html(response.message);
                     $("#wishlistModal").modal('show');
 
-                }else {
-                    window.location.href="{{route('account.login')}}"
+                } else {
+                    window.location.href = "{{route('account.login')}}"
                 }
             }
         });

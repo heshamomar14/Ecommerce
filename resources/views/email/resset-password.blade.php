@@ -11,9 +11,9 @@
 <p>Hello {{$formData['user']->name}}</p>
 <h1> You Have Requested To Change Password</h1>
 <p>
-  please click the link given below to reset password:
+    please click the link given below to reset password:
 </p>
 <a href="{{route('front.resetPassword',$formData['token'])}}">Click Here!</a>
-<p>THANKS A LOT  .....</p>
+<p>THANKS A LOT .....</p>
 </body>
 </html>

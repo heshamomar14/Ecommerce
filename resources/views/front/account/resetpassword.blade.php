@@ -28,14 +28,16 @@
                     <h4 class="modal-title">Reset Password</h4>
                     <div class="form-group">
                         <input type="hidden" name="token" value="{{$token}}">
-                        <input type="password" class="form-control   @error('new_password')is-invalid @enderror" placeholder="new_password"
+                        <input type="password" class="form-control   @error('new_password')is-invalid @enderror"
+                               placeholder="new_password"
                                required="required" name="new_password" value="">
                         @error('new_password')
                         <p class="is-invalid">{{$message}}</p>
                         @enderror
                     </div>
                     <div class="form-group">
-                        <input type="password" class="form-control   @error('confirm_password')is-invalid @enderror" placeholder="confirm_password"
+                        <input type="password" class="form-control   @error('confirm_password')is-invalid @enderror"
+                               placeholder="confirm_password"
                                required="required" name="confirm_password" value="">
                         @error('email')
                         <p class="is-invalid">{{$message}}</p>

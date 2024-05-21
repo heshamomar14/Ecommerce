@@ -1,3 +1,4 @@
+@php use Carbon\Carbon; @endphp
 @extends('front.layouts.app')
 @section('content')
     <section class="section-5 pt-3 pb-3 mb-3 bg-white">
@@ -43,9 +44,9 @@
                                             <p class="mb-lg-0 fs-sm fw-bold">
                                                 <time datetime="2019-10-01">
                                                     @if(!empty($orders->shipped_date))
-                                                    {{\Carbon\Carbon::parse($orders->shipped_date)->format('d M,Y')}}
+                                                        {{Carbon::parse($orders->shipped_date)->format('d M,Y')}}
                                                     @else
-                                                    n/a
+                                                        n/a
                                                     @endif
                                                 </time>
                                             </p>
@@ -56,15 +57,15 @@
                                             <!-- Text -->
                                             <p class="mb-0 fs-sm fw-bold">
 
-                                                    @if($orders->status=='pending')
-                                                        <span class="badge bg-danger">Pending</span>
-                                                    @elseif($orders->status=='shipped')
-                                                        <span class="badge bg-info">Shipped</span>
-                                                    @elseif($orders->status=='cancelled')
-                                                        <span class="badge bg-danger">Cancelled</span>
-                                                    @else
-                                                        <span class="badge bg-success">Delivered</span>
-                                                    @endif
+                                                @if($orders->status=='pending')
+                                                    <span class="badge bg-danger">Pending</span>
+                                                @elseif($orders->status=='shipped')
+                                                    <span class="badge bg-info">Shipped</span>
+                                                @elseif($orders->status=='cancelled')
+                                                    <span class="badge bg-danger">Cancelled</span>
+                                                @else
+                                                    <span class="badge bg-success">Delivered</span>
+                                                @endif
                                             </p>
                                         </div>
                                         <div class="col-6 col-lg-3">
@@ -72,7 +73,7 @@
                                             <h6 class="heading-xxxs text-muted">Order Amount:</h6>
                                             <!-- Text -->
                                             <p class="mb-0 fs-sm fw-bold">
-                                               $ {{$orders->grand_total}}
+                                                $ {{$orders->grand_total}}
                                             </p>
                                         </div>
                                     </div>
@@ -90,31 +91,36 @@
 
                             <!-- List group -->
                             <ul>
-                                            @foreach($orderItems as $item)
-                                                <li class="list-group-item">
-                                                    <div class="row align-items-center">
-                                                        <div class="col-4 col-md-3 col-xl-2">
-                                                            <!-- Image -->
-{{--                                                            <a href="#"><img src="images/product-2.jpg" alt="..." class="img-fluid"></a>--}}
-                                                            @php
-                                                          $productImage=getProductImages($item->product_id);
-                                                            @endphp
-                                                            @if(!empty($productImage->image))
-                                                                <img class="img-fluid" src="{{asset('uploads/product/small/'.$productImage->image)}}" width="50"/>
-                                                            @else
-                                                                <img class="img-fluid" src="{{asset('admin-assets/img/default-150x150.png')}}"  width="50"/>
-                                                            @endif
-                                                        </div>
-                                                        <div class="col">
-                                                            <!-- Title -->
-                                                            <p class="mb-4 fs-sm fw-bold">
-                                                                <a class="text-body" href="#">{{$item->name}} x {{$item->qty}}</a> <br>
-                                                                <span class="text-muted">$ {{$item->total}}</span>
-                                                            </p>
-                                                        </div>
-                                                    </div>
-                                                </li>
-                                            @endforeach
+                                @foreach($orderItems as $item)
+                                    <li class="list-group-item">
+                                        <div class="row align-items-center">
+                                            <div class="col-4 col-md-3 col-xl-2">
+                                                <!-- Image -->
+                                                {{--                                                            <a href="#"><img src="images/product-2.jpg" alt="..." class="img-fluid"></a>--}}
+                                                @php
+                                                    $productImage=getProductImages($item->product_id);
+                                                @endphp
+                                                @if(!empty($productImage->image))
+                                                    <img class="img-fluid"
+                                                         src="{{asset('uploads/product/small/'.$productImage->image)}}"
+                                                         width="50"/>
+                                                @else
+                                                    <img class="img-fluid"
+                                                         src="{{asset('admin-assets/img/default-150x150.png')}}"
+                                                         width="50"/>
+                                                @endif
+                                            </div>
+                                            <div class="col">
+                                                <!-- Title -->
+                                                <p class="mb-4 fs-sm fw-bold">
+                                                    <a class="text-body" href="#">{{$item->name}} x {{$item->qty}}</a>
+                                                    <br>
+                                                    <span class="text-muted">$ {{$item->total}}</span>
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </li>
+                                @endforeach
                             </ul>
                         </div>
                     </div>

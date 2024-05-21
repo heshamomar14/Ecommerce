@@ -26,14 +26,16 @@
                             <div class="col-md-6">
                                 <div class="mb-3">
                                     <label for="name">Name</label>
-                                    <input type="text" name="name"{{$brand->name}}"  id="name" class="form-control" placeholder="Name">
+                                    <input type="text" name="name"{{$brand->name}}" id="name" class="form-control"
+                                    placeholder="Name">
                                     <p></p>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="mb-3">
                                     <label for="slug">Slug</label>
-                                    <input type="text" value="{{$brand->slug}}" name="slug" id="slug" class="form-control" placeholder="Slug">
+                                    <input type="text" value="{{$brand->slug}}" name="slug" id="slug"
+                                           class="form-control" placeholder="Slug">
                                     <p></p>
                                 </div>
                             </div>
@@ -41,7 +43,7 @@
                     </div>
                 </div>
                 <div class="pb-5 pt-3">
-                    <button  type="submit" id="bttn" class="btn btn-primary">update</button>
+                    <button type="submit" id="bttn" class="btn btn-primary">update</button>
                     <a href="{{route('brands.index')}}" class="btn btn-outline-dark ml-3">Cancel</a>
                 </div>
             </form>
@@ -52,10 +54,10 @@
 @endsection
 @section('customJs')
     <script>
-        $("#brandForm").submit(function(event) {
+        $("#brandForm").submit(function (event) {
             event.preventDefault();
             var element = $(this);
-$('#bttn[type=submit]').prop('disabled',true);
+            $('#bttn[type=submit]').prop('disabled', true);
             $.ajax({
                 url: '{{ route("brands.update",$brand->id) }}',  // Use the correct route for POST
                 type: 'put',
@@ -63,17 +65,17 @@ $('#bttn[type=submit]').prop('disabled',true);
                 dataType: 'json',
                 success: function (response) {
                     // Handle the success response
-                    $('#bttn[type=submit]').prop('disabled',false);
+                    $('#bttn[type=submit]').prop('disabled', false);
 
                     if (response['status'] == true) {
-                        window.location.href="{{route('brands.index')}}";
+                        window.location.href = "{{route('brands.index')}}";
                         $('#name').removeClass('is-invalid').siblings('p').removeClass('invalid-feedback').html("");
 
                         $('#slug').removeClass('is-invalid').siblings('p').removeClass('invalid-feedback').html("");
 
                     } else {
-                        if (response['not found']==true){
-                            window.location.href='{{route('brands.index')}}';
+                        if (response['not found'] == true) {
+                            window.location.href = '{{route('brands.index')}}';
                         }
                         var errors = response['errors'];
                         if (errors['name']) {
@@ -86,7 +88,7 @@ $('#bttn[type=submit]').prop('disabled',true);
                             $('#slug').addClass('is-invalid')
                                 .siblings('p').addClass('invalid-feedback').html(errors['slug']);
                         } else {
-                            $('#slug').removeClass('is-invalid').siblings('p').removeClass('invalid-feedback') .html("");
+                            $('#slug').removeClass('is-invalid').siblings('p').removeClass('invalid-feedback').html("");
                         }
                     }
 
@@ -99,24 +101,24 @@ $('#bttn[type=submit]').prop('disabled',true);
             })
 
         });
-$('#name').change(function (){
-    element=$(this);
-    $('#bttn[type=submit]').prop('disabled',true);
+        $('#name').change(function () {
+            element = $(this);
+            $('#bttn[type=submit]').prop('disabled', true);
 
-    $.ajax({
-        url: '{{ route("getSlug") }}',
-        type: 'get',
-        data: {title: element.val()},
-        dataType: 'json',
-        success: function (response) {
-            $('#bttn[type=submit]').prop('disabled',false);
+            $.ajax({
+                url: '{{ route("getSlug") }}',
+                type: 'get',
+                data: {title: element.val()},
+                dataType: 'json',
+                success: function (response) {
+                    $('#bttn[type=submit]').prop('disabled', false);
 
-            if (response['status']==true){
-    $('#slug').val(response['slug']);
-}
-        }
+                    if (response['status'] == true) {
+                        $('#slug').val(response['slug']);
+                    }
+                }
 
-    })
-});
+            })
+        });
     </script>
 @endsection

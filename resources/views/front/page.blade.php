@@ -36,30 +36,36 @@
                         <form class="shake" role="form" method="" id="contactForm" name="contact-form">
                             <div class="mb-3">
                                 <label class="mb-2" for="name">Name</label>
-                                <input class="form-control" id="name" type="text" name="name"  data-error="Please enter your name">
+                                <input class="form-control" id="name" type="text" name="name"
+                                       data-error="Please enter your name">
                                 <p class="help-block with-errors"></p>
                             </div>
 
                             <div class="mb-3">
                                 <label class="mb-2" for="email">Email</label>
-                                <input class="form-control" id="email" type="email" name="email"  data-error="Please enter your Email">
+                                <input class="form-control" id="email" type="email" name="email"
+                                       data-error="Please enter your Email">
                                 <p class="help-block with-errors"></p>
                             </div>
 
                             <div class="mb-3">
                                 <label class="mb-2">Subject</label>
-                                <input class="form-control" id="subject" type="text" name="subject"  data-error="Please enter your message subject">
+                                <input class="form-control" id="subject" type="text" name="subject"
+                                       data-error="Please enter your message subject">
                                 <p class="help-block with-errors"></p>
                             </div>
 
                             <div class="mb-3">
                                 <label for="message" class="mb-2">Message</label>
-                                <textarea class="form-control" rows="3" id="message" name="message"  data-error="Write your message"></textarea>
+                                <textarea class="form-control" rows="3" id="message" name="message"
+                                          data-error="Write your message"></textarea>
                                 <div class="help-block with-errors"></div>
                             </div>
 
                             <div class="form-submit">
-                                <button class="btn btn-dark" type="submit" id="form-submit"><i class="material-icons mdi mdi-message-outline"></i> Send Message</button>
+                                <button class="btn btn-dark" type="submit" id="form-submit"><i
+                                        class="material-icons mdi mdi-message-outline"></i> Send Message
+                                </button>
                                 <div id="msgSubmit" class="h3 text-center hidden"></div>
                                 <div class="clearfix"></div>
                             </div>
@@ -80,19 +86,17 @@
 @endsection
 @section('customJs')
     <script>
-        $("#contactForm").submit(function(event){
+        $("#contactForm").submit(function (event) {
             event.preventDefault();
             $.ajax({
-                url:'{{route('front.sendContactEmail')}}',
-                type:'post',
-                data:$(this).serializeArray(),
-                dataType:'json',
-                success: function(response){
-                    if (response.status==true)
-                    {
+                url: '{{route('front.sendContactEmail')}}',
+                type: 'post',
+                data: $(this).serializeArray(),
+                dataType: 'json',
+                success: function (response) {
+                    if (response.status == true) {
                         window.location.href = '{{route('front.page',$page->slug)}}'
-                    }
-                    else{
+                    } else {
                         var errors = response['errors'];
                         if (errors['name']) {
                             $('#name').addClass('is-invalid')

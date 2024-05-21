@@ -28,21 +28,23 @@
                             <div class="col-md-6">
                                 <div class="mb-3">
                                     <label for="name">Name</label>
-                                    <input value="{{$user->name}}" type="text" name="name" id="name" class="form-control" placeholder="Name">
+                                    <input value="{{$user->name}}" type="text" name="name" id="name"
+                                           class="form-control" placeholder="Name">
                                     <p></p>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="mb-3">
                                     <label for="">Email</label>
-                                    <input value="{{$user->email}}" type="text" name="email" id="email" class="form-control" >
+                                    <input value="{{$user->email}}" type="text" name="email" id="email"
+                                           class="form-control">
                                     <p></p>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="mb-3">
                                     <label for="">Password</label>
-                                    <input  type="password" name="password" id="password" class="form-control" >
+                                    <input type="password" name="password" id="password" class="form-control">
                                     <span> To change password you have enter a value , otherwise leave blank</span>
                                     <p></p>
                                 </div>
@@ -50,7 +52,8 @@
                             <div class="col-md-6">
                                 <div class="mb-3">
                                     <label for="phone">Phone</label>
-                                    <input  value="{{$user->phone}}" type="text" name="phone" id="phone" class="form-control" placeholder="phone">
+                                    <input value="{{$user->phone}}" type="text" name="phone" id="phone"
+                                           class="form-control" placeholder="phone">
                                     <p></p>
                                 </div>
                             </div>
@@ -58,9 +61,9 @@
                             <div class="col-md-6">
                                 <div class="mb-3">
                                     <label for="status">Status</label>
-                                    <select  name="status" id="status" class="form-control">
+                                    <select name="status" id="status" class="form-control">
                                         <option {{($user->status==1)?'selected':''}} value="1">Active</option>
-                                        <option  {{($user->status==1)?'selected':''}} value="0">Block</option>
+                                        <option {{($user->status==1)?'selected':''}} value="0">Block</option>
                                     </select>
                                 </div>
                             </div>
@@ -68,7 +71,7 @@
                     </div>
                 </div>
                 <div class="pb-5 pt-3">
-                    <button  type="submit" id="bttn" class="btn btn-primary">update</button>
+                    <button type="submit" id="bttn" class="btn btn-primary">update</button>
                     <a href="{{route('users.index')}}" class="btn btn-outline-dark ml-3">Cancel</a>
                 </div>
             </form>
@@ -82,7 +85,7 @@
         $("#userForm").submit(function (event) {
             event.preventDefault();
             var element = $(this);
-            $('#bttn[type=submit]').prop('disabled',true);
+            $('#bttn[type=submit]').prop('disabled', true);
             $.ajax({
                 url: '{{ route("users.update",$user->id) }}',  // Use the correct route for POST
                 type: 'put',
@@ -90,7 +93,7 @@
                 dataType: 'json',
                 success: function (response) {
                     // Handle the success response
-                    $('#bttn[type=submit]').prop('disabled',false);
+                    $('#bttn[type=submit]').prop('disabled', false);
 
                     if (response['status'] == true) {
                         window.location.href = "{{route('users.index')}}";

@@ -1,3 +1,4 @@
+@php use Carbon\Carbon; @endphp
 @extends('admin.layouts.app')
 @section('content')
     <!-- Content Header (Page header) -->
@@ -29,7 +30,8 @@
 
                         <div class="card-tools">
                             <div class="input-group input-group" style="width: 250px;">
-                                <input value="{{Request::get('keyword')}}" type="text" name="keyword" class="form-control float-right" placeholder="Search">
+                                <input value="{{Request::get('keyword')}}" type="text" name="keyword"
+                                       class="form-control float-right" placeholder="Search">
                                 <div class="input-group-append">
                                     <button type="submit" class="btn btn-default">
                                         <i class="fa fa-search"></i>
@@ -56,7 +58,7 @@
                         @if($orders->count() > 0)
                             @foreach($orders as $order)
                                 <tr>
-                                    <td> <a href="{{route('order.details',$order->id)}}">{{$order->id}}</a></td>
+                                    <td><a href="{{route('order.details',$order->id)}}">{{$order->id}}</a></td>
                                     <td>{{$order->name}}</td>
                                     <td>{{$order->email}}</td>
                                     <td>{{$order->mobile}}</td>
@@ -72,10 +74,10 @@
                                         @endif
                                     </td>
                                     <td>
-                                      $ {{number_format($order->grand_total,2) }}
+                                        $ {{number_format($order->grand_total,2) }}
                                     </td>
                                     <td>
-                                        {{\Carbon\Carbon::parse($order->created_at)->format('d M, Y')}}
+                                        {{Carbon::parse($order->created_at)->format('d M, Y')}}
                                     </td>
                                 </tr>
                             @endforeach

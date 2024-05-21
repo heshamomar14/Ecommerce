@@ -13,7 +13,9 @@ use Illuminate\Queue\SerializesModels;
 class OrderEmail extends Mailable
 {
     use Queueable, SerializesModels;
+
     public $mailData;
+
     /**
      * Create a new message instance.
      *
@@ -21,32 +23,29 @@ class OrderEmail extends Mailable
      */
     public function __construct($mailData)
     {
-        $this->mailData=$mailData;
+        $this->mailData = $mailData;
     }
 
     /**
      * Get the message envelope.
      *
-     * @return \Illuminate\Mail\Mailables\Envelope
+     * @return Envelope
      */
 
     public function envelope()
     {
-        return new Envelope(
-            subject:$this->mailData['subject'],
-        );
+        return new Envelope(subject: $this->mailData['subject'],);
     }
+
     /**
      * Get the message content definition.
      *
-     * @return \Illuminate\Mail\Mailables\Content
+     * @return Content
      */
 
     public function content()
     {
-        return new Content(
-            view: 'email.order',
-        );
+        return new Content(view: 'email.order',);
     }
 
     /**

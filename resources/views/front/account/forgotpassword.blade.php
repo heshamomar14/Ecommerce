@@ -27,7 +27,8 @@
                     @csrf
                     <h4 class="modal-title">Forgot Password</h4>
                     <div class="form-group">
-                        <input type="text" class="form-control   @error('email')is-invalid @enderror" placeholder="Email"
+                        <input type="text" class="form-control   @error('email')is-invalid @enderror"
+                               placeholder="Email"
                                required="required" name="email" value="{{old('email')}}">
                         @error('email')
                         <p class="is-invalid">{{$message}}</p>

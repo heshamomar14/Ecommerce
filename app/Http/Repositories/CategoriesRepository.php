@@ -3,35 +3,37 @@
 namespace App\Http\Repositories;
 
 use App\Http\Controllers\Controller;
-use App\Models\Brands;
+use App\Models\Category;
 
-class BrandsRepository extends Controller
+class CategoriesRepository extends Controller
 {
-    private Brands $model;
+    private Category $model;
 
     public function __construct()
     {
-        $this->model = new Brands();
+        $this->model = new Category();
     }
 
     public function latest()
     {
         return $this->model->latest('id');
+
+    }
+    public function searchByName($keyword)
+    {
+        return $this->model->where('name', 'like', '%' . $keyword . '%')->paginate(10);
+    }
+    public function find($id)
+    {
+        return $this->model->find($id);
     }
 
     public function where($conditions)
     {
         return $this->model->where($conditions);
     }
-
-    public function searchByName($keyword)
-    {
-        return $this->model->where('name', 'like', '%' . $keyword . '%')->paginate(10);
-    }
-
     public function paginate($perPage = 10)
     {
         return $this->model->paginate($perPage);
-
     }
 }

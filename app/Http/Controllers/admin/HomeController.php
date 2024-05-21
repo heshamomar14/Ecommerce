@@ -15,43 +15,25 @@ class HomeController extends Controller
 
     public function index()
     {
-        $totalOrders=order::where('status','!=','cancelled')->count();
-        $totalProducts=Product::count();
-        $totalUsers=User::where('role',1)->count();
-        $totalRevenue=order::where('status','!=','cancelled')->sum('grand_total');
+        $totalOrders = order::where('status', '!=', 'cancelled')->count();
+        $totalProducts = Product::count();
+        $totalUsers = User::where('role', 1)->count();
+        $totalRevenue = order::where('status', '!=', 'cancelled')->sum('grand_total');
         //revenue of this month
-        $startOfMonth=Carbon::now()->startOfMonth()->format('Y-m-d');
-        $currentDate=Carbon::now()->format('Y-m-d');
-        $revenueThisMonth=order::where('status','!=','cancelled')
-                            ->whereDate('created_at','>=',$startOfMonth)
-                            ->whereDate('created_at','>=',$currentDate)
-                            ->sum('grand_total');
+        $startOfMonth = Carbon::now()->startOfMonth()->format('Y-m-d');
+        $currentDate = Carbon::now()->format('Y-m-d');
+        $revenueThisMonth = order::where('status', '!=', 'cancelled')->whereDate('created_at', '>=', $startOfMonth)->whereDate('created_at', '>=', $currentDate)->sum('grand_total');
         //revenue last month
-        $lastMonthStartDate=Carbon::now()->subMonth()->startOfMonth()->format('Y-m-d');
-        $lastMonthEndDate=Carbon::now()->subMonth()->endOfMonth()->format('Y-m-d');
-        $lastMonthName=Carbon::now()->subMonth()->startOfMonth()->format('M');
-        $revenueLastMonth=order::where('status','!=','cancelled')
-            ->whereDate('created_at','>=',$lastMonthStartDate)
-            ->whereDate('created_at','>=',$lastMonthEndDate)
-            ->sum('grand_total');
- //revenue 30 day  only
-        $lastThirtyDayStartDate=Carbon::now()->subDays(30)->startOfMonth()->format('Y-m-d');
-        $revenueLastThirtyDays=order::where('status','!=','cancelled')
-            ->whereDate('created_at','>=',$lastThirtyDayStartDate)
-            ->whereDate('created_at','>=',$currentDate)
-            ->sum('grand_total');
+        $lastMonthStartDate = Carbon::now()->subMonth()->startOfMonth()->format('Y-m-d');
+        $lastMonthEndDate = Carbon::now()->subMonth()->endOfMonth()->format('Y-m-d');
+        $lastMonthName = Carbon::now()->subMonth()->startOfMonth()->format('M');
+        $revenueLastMonth = order::where('status', '!=', 'cancelled')->whereDate('created_at', '>=', $lastMonthStartDate)->whereDate('created_at', '>=', $lastMonthEndDate)->sum('grand_total');
+        //revenue 30 day  only
+        $lastThirtyDayStartDate = Carbon::now()->subDays(30)->startOfMonth()->format('Y-m-d');
+        $revenueLastThirtyDays = order::where('status', '!=', 'cancelled')->whereDate('created_at', '>=', $lastThirtyDayStartDate)->whereDate('created_at', '>=', $currentDate)->sum('grand_total');
 
 
-        return view('admin.dashboard',[
-            'totalOrders'=>$totalOrders,
-            'totalProducts'=>$totalProducts,
-            'totalUsers'=>$totalUsers,
-            'totalRevenue'=>$totalRevenue,
-            'revenueThisMonth'=>$revenueThisMonth,
-            'revenueLastMonth'=>$revenueLastMonth,
-            'revenueLastThirtyDays'=>$revenueLastThirtyDays,
-            'lastMonthName'=>$lastMonthName
-        ]);
+        return view('admin.dashboard', ['totalOrders' => $totalOrders, 'totalProducts' => $totalProducts, 'totalUsers' => $totalUsers, 'totalRevenue' => $totalRevenue, 'revenueThisMonth' => $revenueThisMonth, 'revenueLastMonth' => $revenueLastMonth, 'revenueLastThirtyDays' => $revenueLastThirtyDays, 'lastMonthName' => $lastMonthName]);
     }
 
 

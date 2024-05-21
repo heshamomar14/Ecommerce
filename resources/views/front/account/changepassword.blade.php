@@ -29,21 +29,25 @@
                                 <div class="row">
                                     <div class="mb-3">
                                         <label for="name">Old Password</label>
-                                        <input type="password" name="old_password" id="old_password" placeholder="Old Password" class="form-control">
+                                        <input type="password" name="old_password" id="old_password"
+                                               placeholder="Old Password" class="form-control">
                                         <p></p>
                                     </div>
                                     <div class="mb-3">
                                         <label for="name">New Password</label>
-                                        <input type="password" name="new_password" id="new_password" placeholder="New Password" class="form-control">
+                                        <input type="password" name="new_password" id="new_password"
+                                               placeholder="New Password" class="form-control">
                                         <p></p>
                                     </div>
                                     <div class="mb-3">
                                         <label for="name">Confirm Password</label>
-                                        <input type="password" name="confirm_password" id="confirm_password" placeholder="Old Password" class="form-control">
+                                        <input type="password" name="confirm_password" id="confirm_password"
+                                               placeholder="Old Password" class="form-control">
                                         <p></p>
                                     </div>
                                     <div class="d-flex">
-                                        <button type="submit" name="submit" id="submit" class="btn btn-dark">Save</button>
+                                        <button type="submit" name="submit" id="submit" class="btn btn-dark">Save
+                                        </button>
                                     </div>
                                 </div>
                             </div>
@@ -57,35 +61,36 @@
 @endsection
 @section('customJs')
     <script type="text/javascript">
-        $("#changePasswordForm").submit(function(e){
+        $("#changePasswordForm").submit(function (e) {
             e.preventDefault();
-            $('#submit').prop('disabled',true);
+            $('#submit').prop('disabled', true);
             $.ajax({
-                url:'{{route('account.changePassword')}}',
-                type:'post',
-                data:$(this).serializeArray(),
-                dataType:'json',
-                success: function(response){
-                    $('#submit').prop('disabled',false);
-                    if (response.status==true){
-                        window.location.href='{{route('account.showChangePassword')}}'
+                url: '{{route('account.changePassword')}}',
+                type: 'post',
+                data: $(this).serializeArray(),
+                dataType: 'json',
+                success: function (response) {
+                    $('#submit').prop('disabled', false);
+                    if (response.status == true) {
+                        window.location.href = '{{route('account.showChangePassword')}}'
 
-                    }
-                    else {
-                        var errors=response.errors;
-                        if (errors.old_password){
+                    } else {
+                        var errors = response.errors;
+                        if (errors.old_password) {
                             $("#old_password").addClass('is-invalid').siblings('p').html(errors.old_password).addClass('invalid-feedback');
-                        }else {
+                        } else {
                             $("#old_password").removeClass('is-invalid').siblings('p').html("").removeClass('invalid-feedback')
 
-                        }  if (errors.new_password){
+                        }
+                        if (errors.new_password) {
                             $("#new_password").addClass('is-invalid').siblings('p').html(errors.new_password).addClass('invalid-feedback');
-                        }else {
+                        } else {
                             $("#new_password").removeClass('is-invalid').siblings('p').html("").removeClass('invalid-feedback')
 
-                        } if (errors.confirm_password){
+                        }
+                        if (errors.confirm_password) {
                             $("#confirm_password").addClass('is-invalid').siblings('p').html(errors.confirm_password).addClass('invalid-feedback');
-                        }else {
+                        } else {
                             $("#confirm_password").removeClass('is-invalid').siblings('p').html("").removeClass('invalid-feedback')
 
                         }

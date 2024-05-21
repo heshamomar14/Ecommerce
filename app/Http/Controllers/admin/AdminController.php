@@ -11,16 +11,14 @@ class AdminController extends Controller
 {
     public function index()
     {
+
         return view('admin.login');
 
     }
 
     public function authenicate(Request $request)
     {
-        $validate = Validator::make($request->all(), [
-            'email' => 'required|email',
-            'password' => 'required|min:6'
-        ]);
+        $validate = Validator::make($request->all(), ['email' => 'required|email', 'password' => 'required|min:6']);
 
         if ($validate->passes()) {
             if (Auth::guard('admin')->attempt(['email' => $request->email, 'password' => $request->password,], $request->get('remember'))) {

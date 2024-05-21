@@ -5,7 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Laravel Shop :: Administrative Panel</title>
     <!-- Google Font: Source Sans Pro -->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="{{asset('admin-assets/plugins/dropzone/min/dropzone.min.css')}}">
     <!-- Theme style -->
@@ -44,7 +45,8 @@
             </li>
             <li class="nav-item dropdown">
                 <a class="nav-link p-0 pr-3" data-toggle="dropdown" href="#">
-                    <img src="{{asset('admin-assets/img/avatar5.png')}}" class='img-circle elevation-2' width="40" height="40" alt="">
+                    <img src="{{asset('admin-assets/img/avatar5.png')}}" class='img-circle elevation-2' width="40"
+                         height="40" alt="">
                 </a>
                 <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right p-3">
                     <h4 class="h4 mb-0"><strong>{{Auth::guard('admin')->user()->name}}</strong></h4>
@@ -76,9 +78,9 @@
     <!-- /.content-wrapper -->
     <footer class="main-footer">
 
-        <strong>Copyright &copy;  By Eng / Hesham Omar
+        <strong>Copyright &copy; By Eng / Hesham Omar
     </footer>
-@csrf</div>
+    @csrf</div>
 <!-- ./wrapper -->
 <!-- jQuery -->
 <script src="{{asset('admin-assets/plugins/jquery/jquery.min.js')}}"></script>
@@ -100,8 +102,8 @@
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         }
     });
-    $(document).ready(function (){
-       $('.summernote').summernote();
+    $(document).ready(function () {
+        $('.summernote').summernote();
     });
 </script>
 

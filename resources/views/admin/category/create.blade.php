@@ -41,8 +41,8 @@
                             </div>
                             <div class="col-md-6">
                                 <div class="mb-3">
-{{--                                    <input type="file" name="image_id" accept="image/*">--}}
-                                    <input  type="hidden" id="image_id" name="image_id" accept="image/*">
+                                    {{--                                    <input type="file" name="image_id" accept="image/*">--}}
+                                    <input type="hidden" id="image_id" name="image_id" accept="image/*">
                                     <label for="image">Image</label>
                                     <div id="image" class="dropzone dz-clickable">
                                         <div class="dz-message needsclick">
@@ -54,7 +54,7 @@
                             <div class="col-md-6">
                                 <div class="mb-3">
                                     <label for="status">Status</label>
-                                    <select  name="status" id="status" class="form-control">
+                                    <select name="status" id="status" class="form-control">
                                         <option value="1">Active</option>
                                         <option value="0">Block</option>
                                     </select>
@@ -63,7 +63,7 @@
                             <div class="col-md-6">
                                 <div class="mb-3">
                                     <label for="status">Show on Home</label>
-                                    <select  name="showHome" id="showHome" class="form-control">
+                                    <select name="showHome" id="showHome" class="form-control">
                                         <option value="Yes">Yes</option>
                                         <option value="No">No</option>
                                     </select>
@@ -73,7 +73,7 @@
                     </div>
                 </div>
                 <div class="pb-5 pt-3">
-                    <button  type="submit" id="bttn" class="btn btn-primary">Create</button>
+                    <button type="submit" id="bttn" class="btn btn-primary">Create</button>
                     <a href="{{route('categories.index')}}" class="btn btn-outline-dark ml-3">Cancel</a>
                 </div>
             </form>
@@ -87,7 +87,7 @@
         $("#categoryForm").submit(function (event) {
             event.preventDefault();
             var element = $(this);
-            $('#bttn[type=submit]').prop('disabled',true);
+            $('#bttn[type=submit]').prop('disabled', true);
             $.ajax({
                 url: '{{ route("categories.store") }}',  // Use the correct route for POST
                 type: 'post',
@@ -95,7 +95,7 @@
                 dataType: 'json',
                 success: function (response) {
                     // Handle the success response
-                    $('#bttn[type=submit]').prop('disabled',false);
+                    $('#bttn[type=submit]').prop('disabled', false);
 
                     if (response['status'] == true) {
                         window.location.href = "{{route('categories.index')}}";

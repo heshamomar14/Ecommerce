@@ -27,7 +27,7 @@
                                 <div class="mb-3">
                                     <label for="name">Category</label>
                                     <select name="category" id="category" class="form-control">
-                                        <option value=""> select  a category</option>
+                                        <option value=""> select a category</option>
                                         @if($categories->isNotEmpty())
                                             @foreach($categories as $category)
                                                 <option value="{{$category->id}}">{{$category->name}}</option>
@@ -46,7 +46,8 @@
                             <div class="col-md-6">
                                 <div class="mb-3">
                                     <label for="email">Slug</label>
-                                    <input type="text" readonly name="slug" id="slug" class="form-control" placeholder="Slug">
+                                    <input type="text" readonly name="slug" id="slug" class="form-control"
+                                           placeholder="Slug">
                                 </div>
                                 <p></p>
 
@@ -54,7 +55,7 @@
                             <div class="col-md-6">
                                 <div class="mb-3">
                                     <label for="status">Status</label>
-                                    <select  name="status" id="status" class="form-control">
+                                    <select name="status" id="status" class="form-control">
                                         <option value="1">Active</option>
                                         <option value="0">Block</option>
                                     </select>
@@ -64,7 +65,7 @@
                             <div class="col-md-6">
                                 <div class="mb-3">
                                     <label for="status">Show on Home</label>
-                                    <select  name="showHome" id="showHome" class="form-control">
+                                    <select name="showHome" id="showHome" class="form-control">
                                         <option value="Yes">Yes</option>
                                         <option value="No">No</option>
                                     </select>
@@ -87,10 +88,10 @@
 @section('customJs')
     <script>
 
-        $("#subCategoryForm").submit(function(event) {
+        $("#subCategoryForm").submit(function (event) {
             event.preventDefault();
             var element = $(this);
-            $('#button[type=submit]').prop('disabled',true);
+            $('#button[type=submit]').prop('disabled', true);
             $.ajax({
                 url: '{{ route("subCategories.store") }}',  // Use the correct route for POST
                 type: 'post',
@@ -98,9 +99,9 @@
                 dataType: 'json',
                 success: function (response) {
                     // Handle the success response
-                    $('#button[type=submit]').prop('disabled',false);
+                    $('#button[type=submit]').prop('disabled', false);
                     if (response['status'] == true) {
-                        window.location.href="{{route('subCategories.index')}}";
+                        window.location.href = "{{route('subCategories.index')}}";
                         $('#name').removeClass('is-invalid').siblings('p').removeClass('invalid-feedback').html("");
 
                         $('#category').removeClass('is-invalid').siblings('p').removeClass('invalid-feedback').html("");
@@ -117,13 +118,13 @@
                             $('#slug').addClass('is-invalid')
                                 .siblings('p').addClass('invalid-feedback').html(errors['slug']);
                         } else {
-                            $('#slug').removeClass('is-invalid').siblings('p').removeClass('invalid-feedback') .html("");
+                            $('#slug').removeClass('is-invalid').siblings('p').removeClass('invalid-feedback').html("");
                         }
                         if (errors['slug']) {
                             $('#category').addClass('is-invalid')
                                 .siblings('p').addClass('invalid-feedback').html(errors['slug']);
                         } else {
-                            $('#category').removeClass('is-invalid').siblings('p').removeClass('invalid-feedback') .html("");
+                            $('#category').removeClass('is-invalid').siblings('p').removeClass('invalid-feedback').html("");
                         }
                     }
 
@@ -137,9 +138,9 @@
 
         });
 
-        $('#name').change(function (){
-            element=$(this);
-            $('#bttn[type=submit]').prop('disabled',true);
+        $('#name').change(function () {
+            element = $(this);
+            $('#bttn[type=submit]').prop('disabled', true);
 
             $.ajax({
                 url: '{{ route("getSlug") }}',
@@ -147,9 +148,9 @@
                 data: {title: element.val()},
                 dataType: 'json',
                 success: function (response) {
-                    $('#bttn[type=submit]').prop('disabled',false);
+                    $('#bttn[type=submit]').prop('disabled', false);
 
-                    if (response['status']==true){
+                    if (response['status'] == true) {
                         $('#slug').val(response['slug']);
                     }
                 }

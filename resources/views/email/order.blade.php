@@ -23,7 +23,7 @@
     Email: {{$mailData['order']->email}}
 </address>
 <h2>Products</h2>
-<table  cellpadding="3" cellspacing="3" border="0" width="700">
+<table cellpadding="3" cellspacing="3" border="0" width="700">
     <thead>
     <tr style="background: #ccc;">
 
@@ -44,21 +44,22 @@
     @endforeach
 
     <tr>
-        <th colspan="3"align="right" class="text-right">Subtotal:</th>
+        <th colspan="3" align="right" class="text-right">Subtotal:</th>
         <td>$ {{ number_format($mailData['order']->subtotal,2)}}</td>
     </tr>
 
     <tr>
     <tr>
-        <th colspan="3" align="right" class="text-right">Discount: {{(!empty($mailData['order']->coupon_code)?'('.$mailData['order']->coupon_code.')':'')}}</th>
+        <th colspan="3" align="right" class="text-right">
+            Discount: {{(!empty($mailData['order']->coupon_code)?'('.$mailData['order']->coupon_code.')':'')}}</th>
         <td>$ {{ number_format($mailData['order']->discount,2)}}</td>
     </tr>
     <tr>
-        <th colspan="3"align="right" class="text-right">Shipping:</th>
-        <td>$  {{ number_format($mailData['order']->shipping,2)}}</td>
+        <th colspan="3" align="right" class="text-right">Shipping:</th>
+        <td>$ {{ number_format($mailData['order']->shipping,2)}}</td>
     </tr>
     <tr>
-        <th colspan="3"align="right" class="text-right">Grand Total:</th>
+        <th colspan="3" align="right" class="text-right">Grand Total:</th>
         <td>$ {{ number_format($mailData['order']->grand_total,2)}}</td>
     </tr>
     </tbody>

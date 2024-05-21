@@ -19,10 +19,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CartContoller;
 use App\Http\Controllers\FrontController;
 use App\Http\Controllers\ShopController;
-use App\Mail\OrderEmail;
-use App\Models\order;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Str;
 
@@ -67,7 +64,7 @@ Route::get('/forgotPassword', [AuthController::class, 'forgotPassword'])->name('
 Route::post('/ProcessForgotPassword', [AuthController::class, 'ProcessForgotPassword'])->name('front.ProcessForgotPassword');
 Route::get('/resetPassword/{token}', [AuthController::class, 'resetPassword'])->name('front.resetPassword');
 Route::post('/ProcessResetPassword', [AuthController::class, 'ProcessResetPassword'])->name('front.ProcessResetPassword');
- // save rating product route
+// save rating product route
 Route::post('/save-rating/{productId}', [ShopController::class, 'saveRating'])->name('front.saveRating');
 
 
@@ -164,13 +161,13 @@ Route::group(['prefix' => 'admin'], function () {
 
 //discount coupon routes
         Route::get('/coupons', [DiscountCodeController::class, 'index'])->name('coupon.index');
-        Route::get('/coupon/create', [DiscountCodeController::class,'create'])->name('coupon.create');
+        Route::get('/coupon/create', [DiscountCodeController::class, 'create'])->name('coupon.create');
         Route::post('/coupon', [DiscountCodeController::class, 'store'])->name('coupon.store');
         Route::get('/coupons/{coupon}/edit', [DiscountCodeController::class, 'edit'])->name('coupon.edit');
         Route::put('/coupons/{coupon}', [DiscountCodeController::class, 'update'])->name('coupon.update');
         Route::delete('/coupons/{coupon}', [DiscountCodeController::class, 'destroy'])->name('coupon.delete');
 
-     //orders routes
+        //orders routes
         Route::get('/orders', [OrderController::class, 'index'])->name('order.index');
         Route::get('/orders/{id}', [OrderController::class, 'detail'])->name('order.details');
         Route::post('/order/change-status/{id}', [OrderController::class, 'changeOrderStatus'])->name('order.changeOrderStatus');
@@ -179,7 +176,7 @@ Route::group(['prefix' => 'admin'], function () {
 
         //users routes
         Route::get('/users', [UserController::class, 'index'])->name('users.index');
-        Route::get('/users/create', [UserController::class,'create'])->name('users.create');
+        Route::get('/users/create', [UserController::class, 'create'])->name('users.create');
         Route::post('/user', [UserController::class, 'store'])->name('users.store');
         Route::get('/users/{user}/edit', [UserController::class, 'edit'])->name('users.edit');
         Route::put('/users/{user}', [UserController::class, 'update'])->name('users.update');
@@ -187,15 +184,11 @@ Route::group(['prefix' => 'admin'], function () {
 
         // static pages routes
         Route::get('/pages', [PageController::class, 'index'])->name('pages.index');
-        Route::get('/pages/create', [PageController::class,'create'])->name('pages.create');
+        Route::get('/pages/create', [PageController::class, 'create'])->name('pages.create');
         Route::post('/pages', [PageController::class, 'store'])->name('pages.store');
         Route::get('/pages/{page}/edit', [PageController::class, 'edit'])->name('pages.edit');
         Route::put('/pages/{page}', [PageController::class, 'update'])->name('pages.update');
         Route::delete('/pages/{page}', [PageController::class, 'destroy'])->name('pages.delete');
-
-
-
-
 
 
         //our controllers for my ajax method and addtional methods in  Admin pages

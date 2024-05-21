@@ -27,35 +27,27 @@ class ProductImageContorller extends Controller
             $productImage->image = $imageName;
             $productImage->save();
 
-            //generate thumb for product
-            //largeImages
             $destPath = public_path() . '/uploads/product/large/' . $productImage->image;
             $image = Image::read($sourcePath);
             $image->resize(1400, null, function ($constraint) {
                 $constraint->aspectRatio();
             });
             $image->save($destPath);
-            //smallImages
             $destPath = public_path() . '/uploads/product/small/' . $productImage->image;
             $image = Image::read($sourcePath);
             $image->resize(300, 300);
             $image->save($destPath);
-            return response()->json(['status' => true, 'message' => 'image saved successfuly',
-                'image_id' => $productImage->id,
-                'ImagePath' => asset('uploads/product/small/' . $productImage->image)]);
+            return response()->json(['status' => true, 'message' => 'image saved successfully', 'image_id' => $productImage->id, 'ImagePath' => asset('uploads/product/small/' . $productImage->image)]);
         }
     }
+
     public function destroy(Request $request)
     {
-        $productsImage=ProductImage::find($request->id);
-        if (empty($productsImage)){
-            return response()->json([
-                'status'=>false,'message'=>'image not found'
-            ]);
+        $productsImage = ProductImage::find($request->id);
+        if (empty($productsImage)) {
+            return response()->json(['status' => false, 'message' => 'image not found']);
 
 
-
-            //delete image from his folder
             File::delete(public_path('/uploads/product/large/') . $productImage->image);
             File::delete(public_path('/uploads/product/small/') . $productImage->image);
             $productsImage->delete();
